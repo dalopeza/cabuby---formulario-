@@ -10,9 +10,9 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { name, email, phone, message } = JSON.parse(event.body);
+    const { nombre, empresa, rubro, telefono, email } = JSON.parse(event.body);
 
-    if (!name || !email) {
+    if (!nombre || !email) {
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'Nombre y correo son requeridos.' }),
@@ -22,22 +22,23 @@ exports.handler = async (event) => {
     // 1. Guardar en Neon PostgreSQL
     const sql = neon(process.env.DATABASE_URL);
     await sql`
-      INSERT INTO leads (name, email, phone, message, created_at)
-      VALUES (${name}, ${email}, ${phone || null}, ${message || null}, NOW())
+      INSERT INTO leads (nombre, empresa, rubro, telefono, email, created_at)
+      VALUES (${nombre}, ${empresa || null}, ${rubro || null}, ${telefono || null}, ${email}, NOW())
     `;
 
     // 2. Enviar correo con Resend
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
       from: 'onboarding@resend.dev',
-      to: 'tu-email@dominio.com', // Reemplaza por tu correo de recepción
-      subject: `Nuevo Lead Recibido: ${name}`,
+      to: 'tu-email@dominio.com', // Coloca aquí el correo donde quieres recibir los avisos
+      subject: `Nuevo Lead Recibido: ${nombre}`,
       html: `
-        <h3>¡Tienes un nuevo lead!</h3>
-        <p><strong>Nombre:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Teléfono:</strong> ${phone || 'No especificado'}</p>
-        <p><strong>Mensaje:</strong> ${message || 'Sin mensaje'}</p>
+        <h3>¡Nuevo registro en el formulario!</h3>
+        <p><strong>Nombre Completo:</strong> ${nombre}</p>
+        <p><strong>Empresa:</strong> ${empresa || 'No especificado'}</p>
+        <p><strong>Rubro / Sector:</strong> ${rubro || 'No especificado'}</p>
+        <p><strong>Teléfono / WhatsApp:</strong> ${telefono || 'No especificado'}</p>
+        <p><strong>Correo Electrónico:</strong> ${email}</p>
       `,
     });
 

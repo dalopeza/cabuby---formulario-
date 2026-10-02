@@ -169,22 +169,22 @@
       
       btn.disabled = true;
       btn.innerText = "Guardando...";
-
+  
       const payload = {
         nombre: document.getElementById('nombre').value,
         empresa: document.getElementById('empresa').value,
         rubro: document.getElementById('rubro').value,
-        email: document.getElementById('email').value,
         telefono: document.getElementById('telefono').value,
+        email: document.getElementById('email').value,
       };
-
+  
       try {
-        const response = await fetch('/api/lead', {
+        const response = await fetch('/.netlify/functions/lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-
+  
         if (response.ok) {
           msg.className = "text-sm text-center mt-4 text-emerald-400 font-medium block";
           msg.innerText = "¡Información registrada con éxito!";
