@@ -38,14 +38,14 @@
 </style>
 
 <style>
-  #netlify-badge,
-  [data-netlify-badge],
-  .netlify-badge,
-  iframe[src*="netlify"],
-  netlify-drawer {
+  /* Oculta el iframe inyectado por Netlify */
+  iframe#nl-badge-frame,
+  iframe[id="nl-badge-frame"],
+  iframe[src*="about:srcdoc"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
+    pointer-events: none !important;
   }
 </style>
 
