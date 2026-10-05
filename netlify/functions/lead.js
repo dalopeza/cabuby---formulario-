@@ -30,7 +30,7 @@ exports.handler = async (event) => {
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
       from: 'onboarding@resend.dev',
-      to: 'tu-email@dominio.com', // Coloca aquí el correo donde quieres recibir los avisos
+      to: 'dalopeza.dev@gmail.com', // Coloca aquí el correo donde quieres recibir los avisos
       subject: `Nuevo Lead Recibido: ${nombre}`,
       html: `
         <h3>¡Nuevo registro en el formulario!</h3>
