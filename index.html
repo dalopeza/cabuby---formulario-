@@ -1,220 +1,291 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aurora Hero Preview</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  @keyframes aurora-move-1 {
-    0%, 100% { transform: translate(0%, 0%) scale(1); }
-    33% { transform: translate(15%, -10%) scale(1.15); }
-    66% { transform: translate(-10%, 10%) scale(0.95); }
-  }
-  @keyframes aurora-move-2 {
-    0%, 100% { transform: translate(0%, 0%) scale(1); }
-    33% { transform: translate(-15%, 10%) scale(1.1); }
-    66% { transform: translate(10%, -15%) scale(0.9); }
-  }
-  @keyframes aurora-move-3 {
-    0%, 100% { transform: translate(0%, 0%) scale(1); }
-    50% { transform: translate(10%, 15%) scale(1.2); }
-  }
-  .blob {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(90px);
-    opacity: 0.6;
-    will-change: transform;
-  }
-  .blob-1 { animation: aurora-move-1 2s ease-in-out infinite; }
-  .blob-2 { animation: aurora-move-2 3s ease-in-out infinite; }
-  .blob-3 { animation: aurora-move-3 4s ease-in-out infinite; }
-
-  .noise {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.04;
-  }
-</style>
-
-<style>
-  /* Oculta el iframe inyectado por Netlify */
-  iframe#nl-badge-frame,
-  iframe[id="nl-badge-frame"],
-  iframe[src*="about:srcdoc"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-</style>
-
-
-</head>
-<body class="bg-[#0a0a0f]">
-
-  <section class="relative w-full h-screen overflow-hidden flex items-center justify-center">
-
-    <!-- Fondo base -->
-    <div class="absolute inset-0 bg-[#0a0a0f]"></div>
-
-    <!-- Blobs de gradiente animados -->
-    <div class="absolute inset-0">
-      <div class="blob blob-1 w-[500px] h-[500px] bg-purple-600 top-[-10%] left-[-5%]"></div>
-      <div class="blob blob-2 w-[450px] h-[450px] bg-blue-500 top-[20%] right-[-10%]"></div>
-      <div class="blob blob-3 w-[400px] h-[400px] bg-pink-500 bottom-[-15%] left-[25%]"></div>
-    </div>
-
-    <!-- Textura de ruido encima para look "grain" -->
-    <div class="absolute inset-0 noise pointer-events-none"></div>
-
-    <!-- Overlay oscuro para legibilidad del texto -->
-    <div class="absolute inset-0 bg-black/30"></div>
-
-    <!-- Contenido del Hero -->
-    <div class="relative z-10 text-center px-6">
-      <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
-        Cabuby - Startup
-      </h1>
-      <p class="text-lg md:text-xl text-white/70 max-w-xl mx-auto">
-        Empresa de reciente creación que utiliza la tecnología para ofrecer una idea innovadora y lograr un crecimiento rápido y escalable.
-      </p>
-      <button class="mt-8 px-6 py-3 rounded-full bg-white text-black font-medium hover:bg-white/90 transition">
-        Llamanos
-      </button>
-    </div>
-
-  </section>
-
-  <!-- Contenedor Responsivo del Formulario -->
-<div class="w-full max-w-xl mx-auto px-4 py-6 sm:px-6">
-    <div class="bg-slate-900/80 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/10 text-white shadow-2xl">
-      
-      <div class="mb-6 text-center">
-        <h3 class="text-xl sm:text-2xl font-bold tracking-tight">Registra tu información</h3>
-        <p class="text-xs sm:text-sm text-gray-400 mt-1">Ingresa tus datos para ponernos en contacto contigo.</p>
-      </div>
-      
-      <form id="leadForm" class="space-y-4">
-        <!-- Fila 1: Nombre y Empresa (2 cols en PC, 1 en móvil) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Nombre Completo</label>
-            <input 
-              type="text" 
-              id="nombre" 
-              required 
-              placeholder="Ej. Juan Pérez" 
-              class="w-full bg-slate-800/60 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
-            />
-          </div>
-  
-          <div>
-            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Empresa</label>
-            <input 
-              type="text" 
-              id="empresa" 
-              required 
-              placeholder="Ej. Mi Startup S.A.C." 
-              class="w-full bg-slate-800/60 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
-            />
-          </div>
-        </div>
-  
-        <!-- Fila 2: Rubro y Teléfono -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Rubro / Sector</label>
-            <input 
-              type="text" 
-              id="rubro" 
-              required 
-              placeholder="Ej. Tecnología, Comercio" 
-              class="w-full bg-slate-800/60 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
-            />
-          </div>
-  
-          <div>
-            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Teléfono / WhatsApp</label>
-            <input 
-              type="tel" 
-              id="telefono" 
-              required 
-              placeholder="+51 987 654 321" 
-              class="w-full bg-slate-800/60 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
-            />
-          </div>
-        </div>
-  
-        <!-- Fila 3: Correo Electrónico (Ancho completo) -->
-        <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Correo Electrónico</label>
-          <input 
-            type="email" 
-            id="email" 
-            required 
-            placeholder="correo@ejemplo.com" 
-            class="w-full bg-slate-800/60 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
-          />
-        </div>
-  
-        <!-- Botón de Envío -->
-        <div class="pt-2">
-          <button 
-            type="submit" 
-            id="btnSubmit" 
-            class="w-full bg-white text-black font-semibold py-3 px-4 rounded-xl hover:bg-gray-200 active:scale-[0.99] transition-all text-sm shadow-md cursor-pointer"
-          >
-            Enviar información
-          </button>
-        </div>
-      </form>
-      
-      <p id="msgStatus" class="text-sm text-center mt-4 hidden font-medium"></p>
-    </div>
-  </div>
-
-  <script>
-    document.getElementById('leadForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const btn = document.getElementById('btnSubmit');
-      const msg = document.getElementById('msgStatus');
-      
-      btn.disabled = true;
-      btn.innerText = "Guardando...";
-  
-      const payload = {
-        nombre: document.getElementById('nombre').value,
-        empresa: document.getElementById('empresa').value,
-        rubro: document.getElementById('rubro').value,
-        telefono: document.getElementById('telefono').value,
-        email: document.getElementById('email').value,
-      };
-  
-      try {
-        const response = await fetch('/.netlify/functions/lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-  
-        if (response.ok) {
-          msg.className = "text-sm text-center mt-4 text-emerald-400 font-medium block";
-          msg.innerText = "¡Información registrada con éxito!";
-          document.getElementById('leadForm').reset();
-        } else {
-          throw new Error("Error en la solicitud");
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aurora Hero Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes aurora-move-1 {
+        0%,
+        100% {
+          transform: translate(0%, 0%) scale(1);
         }
-      } catch (err) {
-        msg.className = "text-sm text-center mt-4 text-rose-400 font-medium block";
-        msg.innerText = "Hubo un problema al guardar tus datos. Inténtalo de nuevo.";
-      } finally {
-        btn.disabled = false;
-        btn.innerText = "Enviar información";
+        33% {
+          transform: translate(15%, -10%) scale(1.15);
+        }
+        66% {
+          transform: translate(-10%, 10%) scale(0.95);
+        }
       }
-    });
-  </script>
+      @keyframes aurora-move-2 {
+        0%,
+        100% {
+          transform: translate(0%, 0%) scale(1);
+        }
+        33% {
+          transform: translate(-15%, 10%) scale(1.1);
+        }
+        66% {
+          transform: translate(10%, -15%) scale(0.9);
+        }
+      }
+      @keyframes aurora-move-3 {
+        0%,
+        100% {
+          transform: translate(0%, 0%) scale(1);
+        }
+        50% {
+          transform: translate(10%, 15%) scale(1.2);
+        }
+      }
+      .blob {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(90px);
+        opacity: 0.6;
+        will-change: transform;
+      }
+      .blob-1 {
+        animation: aurora-move-1 2s ease-in-out infinite;
+      }
+      .blob-2 {
+        animation: aurora-move-2 3s ease-in-out infinite;
+      }
+      .blob-3 {
+        animation: aurora-move-3 4s ease-in-out infinite;
+      }
 
-</body>
+      .noise {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        opacity: 0.04;
+      }
+    </style>
+
+    <style>
+      /* Oculta el iframe inyectado por Netlify */
+      iframe#nl-badge-frame,
+      iframe[id="nl-badge-frame"],
+      iframe[src*="about:srcdoc"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    </style>
+  </head>
+  <body class="bg-[#0a0a0f]">
+    <section
+      class="relative w-full h-screen overflow-hidden flex items-center justify-center"
+    >
+      <!-- Fondo base -->
+      <div class="absolute inset-0 bg-[#0a0a0f]"></div>
+
+      <!-- Blobs de gradiente animados -->
+      <div class="absolute inset-0">
+        <div
+          class="blob blob-1 w-[500px] h-[500px] bg-purple-600 top-[-10%] left-[-5%]"
+        ></div>
+        <div
+          class="blob blob-2 w-[450px] h-[450px] bg-blue-500 top-[20%] right-[-10%]"
+        ></div>
+        <div
+          class="blob blob-3 w-[400px] h-[400px] bg-pink-500 bottom-[-15%] left-[25%]"
+        ></div>
+      </div>
+
+      <!-- Textura de ruido encima para look "grain" -->
+      <div class="absolute inset-0 noise pointer-events-none"></div>
+
+      <!-- Overlay oscuro para legibilidad del texto -->
+      <div class="absolute inset-0 bg-black/30"></div>
+
+      <!-- Contenido del Hero -->
+      <div class="relative z-10 text-center px-6">
+        <h1
+          class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight"
+        >
+          Cabuby - Startup
+        </h1>
+        <p class="text-lg md:text-xl text-white/70 max-w-xl mx-auto">
+          Empresa de reciente creación que utiliza la tecnología para ofrecer
+          una idea innovadora y lograr un crecimiento rápido y escalable.
+        </p>
+        <button
+          class="mt-8 px-6 py-3 rounded-full bg-white text-black font-medium hover:bg-white/90 transition"
+        >
+          Llamanos
+        </button>
+      </div>
+    </section>
+
+    <!-- Sección Contenedora con Parallax -->
+    <section
+      class="relative w-full min-h-screen flex items-center justify-center bg-cover bg-center bg-fixed py-12"
+      style="
+        background-image: url(&quot;https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop&quot;);
+      "
+    >
+      <!-- Capa oscura de superposición (Overlay) para mejorar la legibilidad -->
+      <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-[2px]"></div>
+
+      <!-- Contenedor Responsivo del Formulario -->
+      <div class="relative z-10 w-full max-w-xl mx-auto px-4 py-6 sm:px-6">
+        <div
+          class="bg-slate-900/80 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/10 text-white shadow-2xl"
+        >
+          <div class="mb-6 text-center">
+            <h3 class="text-xl sm:text-2xl font-bold tracking-tight">
+              Registra tu información
+            </h3>
+            <p class="text-xs sm:text-sm text-gray-400 mt-1">
+              Ingresa tus datos para ponernos en contacto contigo.
+            </p>
+          </div>
+
+          <form id="leadForm" class="space-y-4">
+            <!-- Fila 1: Nombre y Empresa (2 cols en PC, 1 en móvil) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5"
+                  >Nombre Completo</label
+                >
+                <input
+                  type="text"
+                  id="nombre"
+                  required
+                  placeholder="Ej. Juan Pérez"
+                  class="w-full bg-slate-800/60 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
+                />
+              </div>
+
+              <div>
+                <label
+                  class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5"
+                  >Empresa</label
+                >
+                <input
+                  type="text"
+                  id="empresa"
+                  required
+                  placeholder="Ej. Mi Startup S.A.C."
+                  class="w-full bg-slate-800/60 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
+                />
+              </div>
+            </div>
+
+            <!-- Fila 2: Rubro y Teléfono -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5"
+                  >Rubro / Sector</label
+                >
+                <input
+                  type="text"
+                  id="rubro"
+                  required
+                  placeholder="Ej. Tecnología, Comercio"
+                  class="w-full bg-slate-800/60 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
+                />
+              </div>
+
+              <div>
+                <label
+                  class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5"
+                  >Teléfono / WhatsApp</label
+                >
+                <input
+                  type="tel"
+                  id="telefono"
+                  required
+                  placeholder="+51 987 654 321"
+                  class="w-full bg-slate-800/60 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
+                />
+              </div>
+            </div>
+
+            <!-- Fila 3: Correo Electrónico (Ancho completo) -->
+            <div>
+              <label
+                class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5"
+                >Correo Electrónico</label
+              >
+              <input
+                type="email"
+                id="email"
+                required
+                placeholder="correo@ejemplo.com"
+                class="w-full bg-slate-800/60 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
+              />
+            </div>
+
+            <!-- Botón de Envío -->
+            <div class="pt-2">
+              <button
+                type="submit"
+                id="btnSubmit"
+                class="w-full bg-white text-black font-semibold py-3 px-4 rounded-xl hover:bg-gray-200 active:scale-[0.99] transition-all text-sm shadow-md cursor-pointer"
+              >
+                Enviar información
+              </button>
+            </div>
+          </form>
+
+          <p
+            id="msgStatus"
+            class="text-sm text-center mt-4 hidden font-medium"
+          ></p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document
+        .getElementById("leadForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const btn = document.getElementById("btnSubmit");
+          const msg = document.getElementById("msgStatus");
+
+          btn.disabled = true;
+          btn.innerText = "Guardando...";
+
+          const payload = {
+            nombre: document.getElementById("nombre").value,
+            empresa: document.getElementById("empresa").value,
+            rubro: document.getElementById("rubro").value,
+            telefono: document.getElementById("telefono").value,
+            email: document.getElementById("email").value,
+          };
+
+          try {
+            const response = await fetch("/.netlify/functions/lead", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+              msg.className =
+                "text-sm text-center mt-4 text-emerald-400 font-medium block";
+              msg.innerText = "¡Información registrada con éxito!";
+              document.getElementById("leadForm").reset();
+            } else {
+              throw new Error("Error en la solicitud");
+            }
+          } catch (err) {
+            msg.className =
+              "text-sm text-center mt-4 text-rose-400 font-medium block";
+            msg.innerText =
+              "Hubo un problema al guardar tus datos. Inténtalo de nuevo.";
+          } finally {
+            btn.disabled = false;
+            btn.innerText = "Enviar información";
+          }
+        });
+    </script>
+  </body>
 </html>
